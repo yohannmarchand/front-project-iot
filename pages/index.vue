@@ -1,7 +1,10 @@
 <template>
   <div class="pt-10 px-20 flex flex-col items-center">
     <h1 class="font-semi-bold text-4xl">Accordeur de guitare</h1>
-    <Accordeur class="mt-6"/>
+    <Accordeur
+      class="mt-6"
+      :rightValue="440"
+    />
   </div>
 </template>
 

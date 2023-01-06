@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div>
     <div class="relative mt-8 flex rounded-full">
       <div
         v-for="i in 11"
@@ -8,7 +8,7 @@
       />
     </div>
 
-    <div class="-ml-0.5 mt-4">
+    <div class="-ml-1 mt-4">
       <div
         class="mx-auto h-24 w-1 transition-transform bg-green-400 origin-bottom"
         :style="{
@@ -24,7 +24,8 @@
 export default {
   props: {
     value: Number,
-    range: Number,
+    rightValue: Number,
+    range: Number
   },
 
   data() {
@@ -35,8 +36,16 @@ export default {
 
   computed: {
     angle() {
-      return (this.value / 2) * 180;
-    }
+      return ((this.value - this.minValue) / (this.maxValue - this.minValue)) * 180
+    },
+
+    minValue() {
+      return this.rightValue - this.range / 2
+    },
+
+    maxValue() {
+      return this.rightValue + this.range / 2
+    },
   },
 
   methods: {
@@ -49,7 +58,7 @@ export default {
 
       return {
         bottom: y - this.radius + 'px',
-        left: x + 48 + this.radius * 2 + 'px'
+        left: x + this.radius / 2 - 16 + 'px'
       }
     }
   }

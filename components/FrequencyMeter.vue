@@ -48,6 +48,12 @@ export default {
     },
   },
 
+  watch: {
+    rightValue() {
+      this.value = this.minValue
+    }
+  },
+
   methods: {
     getPosition(index) {
       const elCount = 12

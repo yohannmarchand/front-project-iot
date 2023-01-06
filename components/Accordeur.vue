@@ -6,6 +6,7 @@
       :range="range"
     />
 
+    <!-- Test: wait for reel data -->
     <div class="mt-6 mx-auto">
       <input v-model="input" type="range" :min="rightValue - (range / 2)" :max="(range / 2) + rightValue">
     </div>
@@ -29,8 +30,14 @@ export default {
   data() {
     return {
       input: 0,
-      range: 800
+      range: 400
     }
-  }
+  },
+
+  watch: {
+    rightValue() {
+      this.input = Math.ceil(this.rightValue) - (this.range / 2)
+    }
+  },
 }
 </script>

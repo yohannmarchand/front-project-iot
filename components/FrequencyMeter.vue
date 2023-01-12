@@ -36,6 +36,9 @@ export default {
 
   computed: {
     angle() {
+      if (this.value < this.minValue) return -0
+      if (this.value > this.maxValue) return 0
+
       return ((this.value - this.minValue) / (this.maxValue - this.minValue)) * 180
     },
 

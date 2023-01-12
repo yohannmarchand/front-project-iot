@@ -1,9 +1,9 @@
 # front-project-iot
 
 
-#Build with lando
+# Build with lando
 
-##Install [lando](https://lando.dev)
+## Install [lando](https://lando.dev)
 ```bash
 # launch lando
 $ lando start
@@ -14,7 +14,7 @@ $ lando app:start
 
 [https://guitar-tuner.lndo.site](https://guitar-tuner.lndo.site)
 
-##Lando command
+## Lando command
 
 ```bash
 # Stop container

@@ -1,0 +1,22 @@
+name: guitar-tuner
+recipe: lamp
+
+services:
+  appserver:
+    type: node:16
+    scanner: false
+    build:
+      - yarn install
+
+tooling:
+  yarn:
+    service: appserver
+  nuxt:
+    service: appserver
+    cmd:
+      - /app/node_modules/.bin/nuxt
+
+  app:start:
+    service: appserver
+    cmd:
+      - yarn lando

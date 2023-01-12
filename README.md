@@ -1,5 +1,32 @@
 # front-project-iot
 
+
+#Build with lando
+
+##Install [lando](https://lando.dev)
+```bash
+# launch lando
+$ lando start
+
+# launch web server
+$ lando app:start
+```
+
+[https://guitar-tuner.lndo.site](https://guitar-tuner.lndo.site)
+
+##Lando command
+
+```bash
+# Stop container
+$ lando stop
+
+# Rebuild container
+$ lando rebuild
+
+# Use yarn
+$ lando yarn
+```
+
 ## Build Setup
 
 ```bash

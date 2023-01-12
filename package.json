@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "lando": "nuxt --hostname 0.0.0.0 --port 80",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",

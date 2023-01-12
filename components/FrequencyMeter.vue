@@ -10,12 +10,24 @@
 
     <div class="-ml-1 mt-4">
       <div
-        class="mx-auto h-24 w-1 transition-transform bg-green-400 origin-bottom"
+        class="mx-auto h-24 w-1 transition-transform origin-bottom"
+        :class="{
+          'bg-green-400': angle === 90,
+          'bg-orange-400': (45 > angle || angle < 135) && angle !== 90,
+          'bg-red-400': angle < 45 || angle > 135
+        }"
         :style="{
           transform: `rotate(${angle - 90}deg)`
         }"
       />
-      <div class="h-3 w-3 -mt-1.5 rounded-full bg-black mx-auto bg-green-400"/>
+      <div
+        class="h-3 w-3 -mt-1.5 rounded-full bg-black mx-auto bg-green-400"
+        :class="{
+          'bg-green-400': angle === 90,
+          'bg-orange-400': (45 > angle || angle < 135) && angle !== 90,
+          'bg-red-400': angle < 45 || angle > 135
+        }"
+      />
     </div>
   </div>
 </template>

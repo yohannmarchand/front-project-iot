@@ -39,5 +39,26 @@ export default {
       this.input = Math.ceil(this.rightValue) - (this.range / 2)
     }
   },
+
+  created() {
+    const url = ''
+    
+    if (url) {
+      const socket = new WebSocket(url)
+
+      socket.addEventListener('open', (event) => {
+        console.log('Hello Server!');
+      });
+
+      socket.addEventListener('message', (event) => {
+        console.log('Message from server ', event.data);
+
+        if (event.data.frequency) {
+          this.input = event.data.frequency
+        }
+      });
+    }
+  },
+
 }
 </script>

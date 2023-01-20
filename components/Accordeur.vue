@@ -33,7 +33,6 @@ export default {
     return {
       input: 0,
       range: 200,
-      url: 'ws://172.20.10.7/ws',
     }
   },
 
@@ -52,24 +51,5 @@ export default {
       this.input = Math.ceil(this.correctValue) - (this.range / 2)
     }
   },
-
-  created() {
-    if (this.url) {
-      const socket = new WebSocket(this.url)
-
-      socket.addEventListener('open', (event) => {
-        console.log('Hello Server!');
-      });
-
-      socket.addEventListener('message', (event) => {
-        console.log('Message from server ', event.data);
-
-        if (event.data.frequency) {
-          this.input = event.data.frequency
-        }
-      });
-    }
-  },
-
 }
 </script>

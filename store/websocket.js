@@ -40,9 +40,9 @@ export const mutations = {
 
 export const actions = {
   connectToWebSocket({ commit, dispatch }, ip) {
-    commit('SET_IP', ip)
-
     if (ip.match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
+      commit('SET_IP', ip)
+
       commit('CLOSE_WEBSOCKET')
       commit('SET_SOCKECT', new WebSocket(`ws://${ip}/ws`))
       commit('SET_ISLOADING', true)
@@ -57,7 +57,7 @@ export const actions = {
     state.socket.addEventListener('open', (event) => {
       console.log('Hello Server!');
       commit('SET_ISLOADING', false)
-      commit('SET_ISCONNECTED', false)
+      commit('SET_ISCONNECTED', true)
     });
   },
 

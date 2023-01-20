@@ -20,7 +20,6 @@
     "@nuxtjs/tailwindcss": "^5.3.3",
     "postcss": "^8.4.17"
   },
-
   "resolutions": {
     "@nuxt/kit": "3.0.0-rc.13"
   }

@@ -15,7 +15,7 @@
 
         <div
           v-if="openSetting"
-          class="absolute border rounded p-4 top-full right-0"
+          class="absolute bg-white border rounded p-4 top-full right-0"
         >
           <label>Connection to Esp</label>
           <div class="flex items-center">
@@ -48,13 +48,13 @@
         </div>
       </div>
     </div>
-    <div class="flex">
+    <div class="flex flex-col md:flex-row">
       <div>
         <Guitar @click="(value) => onClick(value)"/>
       </div>
 
       <div
-        class="flex flex-col space-y-10 w-full"
+        class="flex flex-col space-y-10 w-full mt-10"
         :class="activeFrequency ? 'justify-between' : 'justify-end'"
       >
         <Accordeur
@@ -103,12 +103,16 @@ export default {
       activeFrequency: null,
       selectedAccordage: accordages.Base,
       openSetting: false,
-      ip: '',
+      ip: '172.20.10.2',
     }
   },
 
   computed: {
     ...mapState('websocket', ['isConnected', 'isLoading']),
+  },
+
+  created() {
+    this.onChange()
   },
 
   methods: {
@@ -117,7 +121,7 @@ export default {
     },
 
     onChange() {
-      this.$store.commit('websocket/setIp', this.ip)
+      this.$store.dispatch('websocket/setIp', this.ip)
     }
   }
 }

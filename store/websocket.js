@@ -39,7 +39,7 @@ export const mutations = {
 }
 
 export const actions = {
-  setIp({ commit, dispatch }, ip) {
+  connectToWebSocket({ commit, dispatch }, ip) {
     commit('SET_IP', ip)
 
     if (ip.match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {

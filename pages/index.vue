@@ -104,7 +104,7 @@ export default {
 
   methods: {
     onClick(value) {
-      this.activeFrequency = this.frequencies.find(({ name }) => name === this.tuning[value]).frequency
+      this.activeFrequency = this.frequencies.find(({ name }) => name === this.tunings[value]).frequency
     },
   }
 }

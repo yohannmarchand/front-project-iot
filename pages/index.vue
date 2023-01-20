@@ -45,16 +45,16 @@
           <div class="text-xl">Trying to connect to the tuner...</div>
         </div>
         <div class="border-4 rounded border-neutral-500 pt-6 px-4 w-full">
-          <div class="text-xl uppercase font-bold text-neutral-700">accordages</div>
+          <div class="text-xl uppercase font-bold text-neutral-700">tunings</div>
           <div class="flex flex-col items-start mt-4 pb-2">
             <button
-              v-for="[name, accordage] in Object.entries(accordages)"
+              v-for="[name, tuning] in Object.entries(tunings)"
               :key="name"
               class="hover:text-neutral-700 hover:text-xl"
-              @click="selectedAccordage = accordage"
-              :class="accordage === selectedAccordage ? 'text-neutral-700 text-xl' : 'text-neutral-500 text-lg '"
+              @click="activeTuning = tuning"
+              :class="activeTuning === tuning ? 'text-neutral-700 text-xl' : 'text-neutral-500 text-lg '"
             >
-              {{ name }} : {{ accordage }}
+              {{ name }} : {{ tuning }}
             </button>
           </div>
         </div>
@@ -69,7 +69,7 @@ import GuitarView from "../components/GuitarView"
 import UserSetting from "../components/UserSetting"
 
 import frequencies from '../content/frequency.js'
-import accordages from "../content/accordage"
+import tunings from "../content/tuning"
 
 import { mapState } from 'vuex'
 
@@ -83,20 +83,28 @@ export default {
   data() {
     return {
       frequencies,
-      accordages,
+      tunings,
       activeFrequency: null,
-      selectedAccordage: accordages.Base,
       openSetting: false,
     }
   },
 
   computed: {
     ...mapState('websocket', ['isConnected', 'isLoading']),
+
+    activeTuning: {
+      get: function () {
+        return this.$store.state.userPreference.tuning
+      },
+      set: function (tuning) {
+        this.$store.commit('userPreference/SET_TUNING', tuning)
+      },
+    }
   },
 
   methods: {
     onClick(value) {
-      this.activeFrequency = this.frequencies.find(({ name }) => name === this.selectedAccordage[value]).frequency
+      this.activeFrequency = this.frequencies.find(({ name }) => name === this.tuning[value]).frequency
     },
   }
 }

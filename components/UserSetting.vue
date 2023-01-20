@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-3">
+  <div class="space-y-3 text-sm">
     <div>
       <label>Connection to Esp</label>
       <div class="flex items-center">
@@ -37,15 +37,26 @@
         </div>
       </div>
     </div>
-    <div>
-      <SwitchInput v-model="isDectetingNote" label="Tone auto detection" />
+    <div class="flex flex-col">
+      <label class="mb-2">Select your tuning</label>
+      <select v-model="tuning" class="border rounded px-2 py-1">
+        <option
+          v-for="[name, tuning] in Object.entries(tunings)"
+          :key="tuning"
+          :value="tuning"
+        >
+          {{ name }}
+        </option>
+      </select>
     </div>
+    <SwitchInput v-model="isDetectingNote" label="Tone auto detection" />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 
+import tunings from "../content/tuning"
 import SwitchInput from "../components/SwitchInput"
 
 export default {
@@ -58,12 +69,30 @@ export default {
   data() {
     return {
       ip: '172.20.10.2',
-      isDectetingNote: false,
+      tunings,
     }
   },
 
   computed: {
     ...mapState('websocket', ['isConnected', 'isLoading']),
+
+    isDetectingNote: {
+      get: function () {
+        return this.$store.state.userPreference.isDetectingNote
+      },
+      set: function (isDetectingNote) {
+        this.$store.commit('userPreference/SET_IS_DETECTING_NOTE', isDetectingNote)
+      },
+    },
+
+    tuning: {
+      get: function () {
+        return this.$store.state.userPreference.tuning
+      },
+      set: function (tuning) {
+        this.$store.commit('userPreference/SET_TUNING', tuning)
+      },
+    }
   },
 
   methods: {

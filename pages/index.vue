@@ -66,7 +66,7 @@
           :rightValue="activeFrequency"
         />
         <div class="border-4 rounded border-neutral-500 pt-6 px-4 w-full">
-          <div class="text-xl uppercase font-bold text-neutral-700">accordage</div>
+          <div class="text-xl uppercase font-bold text-neutral-700">accordages</div>
           <div class="flex flex-col items-start mt-4 pb-2">
             <button
               v-for="[name, accordage] in Object.entries(accordages)"

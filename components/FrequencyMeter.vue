@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div class="relative mt-8 flex rounded-full">
+    <div class="relative rounded-full">
       <div
-        v-for="i in 11"
-        class="absolute w-0.5 h-4 rounded first:h-6 bg-black [&:nth-child(6)]:h-6 last:h-6 first:w-1 bg-black [&:nth-child(6)]:w-1 last:w-1"
+        v-for="i in 9"
+        class="absolute w-0.5 h-4 rounded first:h-6 bg-black [&:nth-child(5)]:h-6 last:h-6 first:w-1 bg-black [&:nth-child(5)]:w-1 [&:nth-child(5)]:-ml-1 last:w-1"
         :style="getPosition(i)"
       />
     </div>
 
-    <div class="-ml-1 mt-4">
+    <div class="-ml-1 mt-4 mx-auto">
       <div
-        class="mx-auto h-24 w-1 transition-transform origin-bottom"
+        class="mx-auto h-14 w-1 transition-transform origin-bottom"
         :class="meterColor"
         :style="{
           transform: `rotate(${angle - 90}deg)`
@@ -34,7 +34,6 @@ export default {
 
   data() {
     return {
-      radius: 150,
       offset: 10,
     }
   },
@@ -74,15 +73,16 @@ export default {
 
   methods: {
     getPosition(index) {
-      const elCount = 12
+      const radius = 272 / 2
+      const elCount = 10
       const angle = (Math.PI / elCount) * index
 
-      const x = this.radius * Math.cos(angle)
-      const y = this.radius * Math.sin(angle)
+      const x = radius * Math.cos(angle)
+      const y = radius * Math.sin(angle)
 
       return {
-        bottom: y - this.radius + 'px',
-        left: x + this.radius / 2 - 16 + 'px'
+        bottom: y - radius + 'px',
+        left: x + radius + 'px'
       }
     }
   }

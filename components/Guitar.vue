@@ -10,21 +10,24 @@
         <path id="neck-0" d="M150.67 342.03L150.12 329.97L111.1 335.28L111.63 347.35L150.67 342.03Z" fill="#E6E6E6">
         </path>
         <path id="key-1"
-              class="cursor-pointer fill-[#E6E6E6] hover:fill-blue-400"
+              class="cursor-pointer hover:fill-blue-400"
+              :class="activeKey === 1 ? 'fill-blue-400' : 'fill-[#E6E6E6]'"
               d="M100.834 278.997L103.174 278.974C111.85 278.89 118.815 271.788 118.73 263.112L118.571 246.862C118.486 238.186 111.384 231.222 102.708 231.307L100.368 231.33C91.6923 231.414 84.7277 238.516 84.8125 247.192L84.9714 263.442C85.0562 272.117 92.1582 279.082 100.834 278.997Z"
-              @click="$emit('click', frequency.find(({ name }) => name === 'A'))"
+              @click="onClick(1)"
         >
         </path>
         <path id="key-0"
-              class="cursor-pointer fill-[#E6E6E6] hover:fill-blue-400"
+              class="cursor-pointer hover:fill-blue-400"
+              :class="activeKey === 0 ? 'fill-blue-400' : 'fill-[#E6E6E6]'"
               d="M101.65 362.4L103.99 362.377C112.666 362.292 119.63 355.19 119.546 346.514L119.426 334.244C119.341 325.568 112.239 318.604 103.563 318.689L101.223 318.712C92.5471 318.796 85.5826 325.898 85.6674 334.574L85.7873 346.844C85.8721 355.52 92.9741 362.484 101.65 362.4Z"
-              @click="$emit('click', frequency.find(({ name }) => name === 'E'))"
+              @click="onClick(0)"
         >
         </path>
         <path id="key-2"
-              class="cursor-pointer fill-[#E6E6E6] hover:fill-blue-400"
+              class="cursor-pointer hover:fill-blue-400"
+              :class="activeKey === 2 ? 'fill-blue-400' : 'fill-[#E6E6E6]'"
               d="M100.081 201.546L102.421 201.523C111.097 201.438 118.061 194.336 117.976 185.66L117.818 169.411C117.733 160.735 110.631 153.771 101.955 153.855L99.6148 153.878C90.9389 153.963 83.9743 161.065 84.0591 169.741L84.2179 185.99C84.3027 194.666 91.4048 201.631 100.081 201.546Z"
-              @click="$emit('click', frequency.find(({ name }) => name === 'D'))"
+              @click="onClick(2)"
         >
 
         </path>
@@ -35,22 +38,24 @@
         <path id="neck-5" d="M294.88 340.62L295.19 328.55L334.31 333.1L334.02 345.17L294.88 340.62Z" fill="#E6E6E6">
         </path>
         <path id="key-4"
-              class="cursor-pointer fill-[#E6E6E6] hover:fill-blue-400"
+              class="cursor-pointer hover:fill-blue-400"
+              :class="activeKey === 4 ? 'fill-blue-400' : 'fill-[#E6E6E6]'"
               d="M343.001 228.964L340.661 228.987C331.985 229.072 325.021 236.174 325.106 244.85L325.265 261.099C325.349 269.775 332.451 276.74 341.127 276.655L343.467 276.632C352.143 276.547 359.108 269.445 359.023 260.769L358.864 244.52C358.779 235.844 351.677 228.88 343.001 228.964Z"
-              @click="$emit('click', frequency.find(({ name }) => name === 'B'))"
+              @click="onClick(4)"
         >
         </path>
         <path id="key-5"
-              class="cursor-pointer fill-[#E6E6E6] hover:fill-blue-400"
+              class="cursor-pointer hover:fill-blue-400"
+              :class="activeKey === 5 ? 'fill-blue-400' : 'fill-[#E6E6E6]'"
               d="M343.866 316.342L341.526 316.365C332.85 316.45 325.885 323.552 325.97 332.228L326.09 344.497C326.175 353.173 333.277 360.137 341.953 360.053L344.293 360.03C352.969 359.945 359.933 352.843 359.848 344.167L359.728 331.898C359.644 323.222 352.542 316.257 343.866 316.342Z"
-              @click="$emit('click', frequency.find(({ name }) => name === 'E'))"
+              @click="onClick(5)"
         >
-          {{ name }}
         </path>
         <path id="key-3"
-              class="cursor-pointer fill-[#E6E6E6] hover:fill-blue-400"
+              class="cursor-pointer hover:fill-blue-400"
+              :class="activeKey === 3 ? 'fill-blue-400' : 'fill-[#E6E6E6]'"
               d="M342.244 151.515L339.905 151.538C331.229 151.623 324.264 158.725 324.349 167.401L324.508 183.65C324.592 192.326 331.695 199.291 340.37 199.206L342.71 199.183C351.386 199.098 358.351 191.996 358.266 183.32L358.107 167.071C358.022 158.395 350.92 151.431 342.244 151.515Z"
-              @click="$emit('click', frequency.find(({ name }) => name === 'G'))"
+              @click="onClick(3)"
         >
         </path>
         <path
@@ -249,8 +254,16 @@
   export default {
     data() {
       return {
-        frequency
+        frequency,
+        activeKey: null,
       }
-    }
+    },
+
+    methods: {
+      onClick(key) {
+        this.activeKey = key
+        this.$emit('click', key)
+      }
+    },
   }
 </script>

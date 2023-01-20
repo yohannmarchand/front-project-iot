@@ -9,16 +9,18 @@ export const state = () => ({
 export const getters = {
   getIsConnected(state) {
     return state.isConnected
-  }
+  },
 }
 
 export const mutations = {
   SET_IP(state, ip) {
     state.ip = ip
   },
+
   SET_ISLOADING(state, isLoading) {
     state.isLoading = isLoading
   },
+
   SET_ISCONNECTED(state, isConnected) {
     state.isConnected = isConnected
   },
@@ -26,41 +28,51 @@ export const mutations = {
     state.socket = socket
   },
 
-  onOpen(state) {
-    state.socket.addEventListener('open', (event) => {
-      console.log('Hello Server!');
-      state.isLoading = false
-      state.isConnected = true
-    });
+  SET_INPUT(state, input) {
+    state.input = input
   },
 
-  onError(state) {
-    state.socket.addEventListener('error', (event) => {
-      console.log('Error Server!');
-      state.isConnected = false
-      state.isLoading = false
-    });
+  CLOSE_WEBSOCKET(state) {
+    state.websocket?.close()
+    state.websocket = null
   },
-
-  onMessage(state) {
-    state.socket.addEventListener('message', (event) => {
-      console.log('Message from server ', event.data);
-      state.input = event.data
-    });
-  }
 }
 
 export const actions = {
-  setIp({commit}, ip) {
+  setIp({ commit, dispatch }, ip) {
     commit('SET_IP', ip)
 
     if (ip.match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
+      commit('CLOSE_WEBSOCKET')
       commit('SET_SOCKECT', new WebSocket(`ws://${ip}/ws`))
       commit('SET_ISLOADING', true)
 
-      commit('onOpen')
-      commit('onError')
-      commit('onMessage')
+      dispatch('onOpen')
+      dispatch('onError')
+      dispatch('onMessage')
     }
+  },
+
+  onOpen({ state, commit }) {
+    state.socket.addEventListener('open', (event) => {
+      console.log('Hello Server!');
+      commit('SET_ISLOADING', false)
+      commit('SET_ISCONNECTED', false)
+    });
+  },
+
+  onError({ state, commit }) {
+    state.socket.addEventListener('error', (event) => {
+      console.log('Error Server!');
+      commit('SET_ISCONNECTED', false)
+      commit('SET_ISLOADING', false)
+    });
+  },
+
+  onMessage({ state, commit }) {
+    state.socket.addEventListener('message', (event) => {
+      console.log('Message from server ', event.data);
+      commit('SET_INPUT', event.data)
+    });
   }
 }

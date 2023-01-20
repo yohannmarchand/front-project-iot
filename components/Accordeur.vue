@@ -7,19 +7,13 @@
       :rightValue="correctValue"
       :range="range"
     />
-
-    <!-- Test: wait for reel data -->
-   <!-- <div class="mt-6 mx-auto">
-      <input v-model="input" type="range" :min="rightValue - (range / 2)" :max="(range / 2) + rightValue">
-    </div>
-    <div class="text-center">
-      Value : {{ input }}
-    </div> -->
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import FrenquencyMeter from "./FrequencyMeter";
+
 export default {
   components: {
     FrenquencyMeter
@@ -31,12 +25,13 @@ export default {
 
   data() {
     return {
-      input: 0,
       range: 200,
     }
   },
 
   computed: {
+    ...mapState('websocket', ['input']),
+
     value() {
       return Math.trunc(this.input);
     },

@@ -3,6 +3,7 @@ export const state = () => ({
   isConnected: false,
   isLoading: false,
   socket: null,
+  input: 0,
 })
 
 export const getters = {
@@ -12,37 +13,54 @@ export const getters = {
 }
 
 export const mutations = {
-  setIp(state, ip) {
+  SET_IP(state, ip) {
     state.ip = ip
+  },
+  SET_ISLOADING(state, isLoading) {
+    state.isLoading = isLoading
+  },
+  SET_ISCONNECTED(state, isConnected) {
+    state.isConnected = isConnected
+  },
+  SET_SOCKECT(state, socket) {
+    state.socket = socket
+  },
 
-    if (ip.match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
-      state.socket = new WebSocket(`ws://${ip}/ws`)
-      state.isLoading = true
+  onOpen(state) {
+    state.socket.addEventListener('open', (event) => {
+      console.log('Hello Server!');
+      state.isLoading = false
+      state.isConnected = true
+    });
+  },
 
-      state.socket.addEventListener('open', (event) => {
-        state.isConnected = true
-        state.isLoading = false
-        console.log('Hello Server!');
-      });
+  onError(state) {
+    state.socket.addEventListener('error', (event) => {
+      console.log('Error Server!');
+      state.isConnected = false
+      state.isLoading = false
+    });
+  },
 
-      state.socket.addEventListener('error', (event) => {
-        state.isConnected = false
-        state.isLoading = false
-        console.log('Error Server!');
-      });
-
-      state.socket.addEventListener('message', (event) => {
-        console.log('Message from server ', event.data);
-      });
-    }
+  onMessage(state) {
+    state.socket.addEventListener('message', (event) => {
+      console.log('Message from server ', event.data);
+      state.input = event.data
+    });
   }
 }
 
 export const actions = {
-  async fetchCounter({ state }) {
-    // make request
-    const res = { data: 10 };
-    state.counter = res.data;
-    return res.data;
+  setIp({commit}, ip) {
+    commit('SET_IP', ip)
+
+    if (ip.match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
+      commit('SET_SOCKECT', new WebSocket(`ws://${ip}/ws`))
+      commit('SET_ISLOADING', true)
+
+      commit('onOpen')
+      commit('onError')
+      commit('onMessage')
+    }
   }
 }

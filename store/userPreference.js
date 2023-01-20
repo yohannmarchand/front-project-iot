@@ -1,6 +1,6 @@
 export const state = () => ({
   isDetectingNote: false,
-  tuning: '',
+  tuning: 'EADGBE',
 })
 
 export const mutations = {

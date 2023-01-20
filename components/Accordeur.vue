@@ -33,7 +33,7 @@ export default {
     ...mapState('websocket', ['input']),
 
     value() {
-      return Math.trunc(this.input);
+      return this.input;
     },
 
     correctValue() {

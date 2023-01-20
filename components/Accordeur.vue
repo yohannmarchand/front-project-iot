@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col space-y-4">
     <FrenquencyMeter
-      :value="input"
+      :value="Math.trunc(input)"
       :rightValue="rightValue"
       :range="range"
     />
@@ -30,7 +30,8 @@ export default {
   data() {
     return {
       input: 0,
-      range: 400
+      range: 400,
+      url: 'ws://172.20.10.7/ws',
     }
   },
 
@@ -41,10 +42,8 @@ export default {
   },
 
   created() {
-    const url = ''
-    
-    if (url) {
-      const socket = new WebSocket(url)
+    if (this.url) {
+      const socket = new WebSocket(this.url)
 
       socket.addEventListener('open', (event) => {
         console.log('Hello Server!');

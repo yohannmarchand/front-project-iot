@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-16 max-w-[272px]">
     <div class="relative rounded-full">
       <div
         v-for="i in 9"

@@ -1,9 +1,8 @@
 ssh -A -t pi@172.20.10.6 "
-   kill -9 $(pgrep -f yarn)
-   kill -9 $(lsof -t -i :3000)
    cd ~/code/front-project-iot
+   rmdir -f /home/website/dist
    git checkout main
    git pull
-   yarn build
-   yarn start
+   yarn generate
+   sudo mv ./dist /home/website
 "

@@ -35,8 +35,8 @@ export default {
     return {
       isOpen: false,
       meters: [
-        { name: 'Circle', component: 'HorizontalMeter' },
-        {  name: 'Horizontal', component: 'FrequencyMeter' }
+        { name: 'Horizontal', component: 'HorizontalMeter' },
+        {  name: 'Circle', component: 'FrequencyMeter' }
       ]
     }
   },

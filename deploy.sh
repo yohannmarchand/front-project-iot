@@ -1,8 +1,9 @@
 ssh -A -t pi@172.20.10.6 "
    cd ~/code/front-project-iot
-   rmdir -f /home/website/dist
+   sudo rm -r /home/website/dist
    git checkout main
    git pull
+   yarn install
    yarn generate
    sudo mv ./dist /home/website
 "

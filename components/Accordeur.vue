@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col content-end">
     <div class="text-center text-3xl text-zinc-400 font-bold">{{ input }}</div>
 
     <component

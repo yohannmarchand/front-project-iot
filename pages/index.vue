@@ -32,7 +32,7 @@
         </div>
         <div class="border-4 rounded border-neutral-500 pt-6 px-4 w-full">
           <div class="text-xl uppercase font-bold text-neutral-700">tunings</div>
-          <div class="flex flex-col items-start mt-4 pb-2">
+          <div class="flex flex-col items-start mt-4 pb-2 max-h-40 overflow-auto">
             <button
               v-for="[name, tuning] in Object.entries(tunings)"
               :key="name"

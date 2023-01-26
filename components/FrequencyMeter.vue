@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-16 max-w-[272px]">
+  <div class="mt-16 max-w-[272px] mx-auto">
     <div class="relative rounded-full">
       <div
         v-for="i in 9"
@@ -82,7 +82,7 @@ export default {
 
       return {
         bottom: y - radius + 'px',
-        left: x + radius + 'px'
+        left: x + 'px'
       }
     }
   }

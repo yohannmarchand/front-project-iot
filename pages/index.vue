@@ -14,12 +14,12 @@
         :class="activeFrequency && !isLoading ? 'justify-between' : 'justify-end'"
       >
         <Accordeur
-          v-if="activeFrequency && !isLoading"
-          class="max-w-[272px] mt-16"
+          v-if="activeFrequency"
+          class="mt-16"
           :rightValue="activeFrequency"
         />
         <div
-          v-if="isLoading"
+          v-if="false && isLoading"
           class="flex flex-col items-center fill-neutral-500 text-neutral-500"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-40 h-40 animate-pulse">

@@ -1,8 +1,15 @@
 <template>
-  <div class="flex flex-col space-y-16">
+  <div class="flex flex-col">
     <div class="text-center text-3xl text-zinc-400 font-bold">{{ input }}</div>
 
     <FrenquencyMeter
+      v-if="false"
+      :value="value"
+      :rightValue="correctValue"
+      :range="range"
+    />
+
+    <HorizontalMeter
       :value="value"
       :rightValue="correctValue"
       :range="range"
@@ -13,9 +20,11 @@
 <script>
 import { mapState } from 'vuex'
 import FrenquencyMeter from "./FrequencyMeter";
+import HorizontalMeter from "./HorizontalMeter"
 
 export default {
   components: {
+    HorizontalMeter,
     FrenquencyMeter
   },
 

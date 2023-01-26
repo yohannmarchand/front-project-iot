@@ -16,6 +16,8 @@
         class="flex flex-col space-y-10 w-full mt-10"
         :class="activeFrequency && !isLoading ? 'justify-between' : 'justify-end'"
       >
+        <SelectingNote :note="frequencies.find(({ frequency }) => frequency == activeFrequency)"/>
+
         <Accordeur
           v-if="activeFrequency && !isLoading"
           class="mt-16"

@@ -2,7 +2,10 @@
   <div class="py-10 px-8 mx-auto rounded mt-16 border-8 ring-8 ring-neutral-50 border-neutral-100 max-w-4xl">
     <div class="flex justify-between items-end">
       <h1 class="text-3xl font-bold text-neutral-400">Guitar Tuner</h1>
-      <UserSetting />
+      <div class="flex space-x-5">
+        <MeterSelector />
+        <UserSetting />
+      </div>
     </div>
     <div class="flex flex-col md:flex-row">
       <div>
@@ -14,12 +17,12 @@
         :class="activeFrequency && !isLoading ? 'justify-between' : 'justify-end'"
       >
         <Accordeur
-          v-if="activeFrequency"
+          v-if="activeFrequency && !isLoading"
           class="mt-16"
           :rightValue="activeFrequency"
         />
         <div
-          v-if="false && isLoading"
+          v-if="isLoading"
           class="flex flex-col items-center fill-neutral-500 text-neutral-500"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-40 h-40 animate-pulse">
@@ -50,6 +53,7 @@
 import Accordeur from "../components/Accordeur";
 import GuitarView from "../components/GuitarView"
 import UserSetting from "../components/UserSetting"
+import MeterSelector from "../components/MeterSelector"
 
 import frequencies from '../content/frequency.js'
 import tunings from "../content/tuning"
@@ -60,6 +64,7 @@ export default {
   components: {
     Accordeur,
     GuitarView,
+    MeterSelector,
     UserSetting,
   },
 

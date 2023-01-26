@@ -11,7 +11,7 @@
     </div>
     <div
       v-if="openSetting"
-      class="absolute z-10 bg-neutral-50 border rounded p-4 top-full right-0"
+      class="absolute z-10 drop-shadow-md mt-2 bg-neutral-50 border rounded p-4 top-full right-0"
     >
       <div class="space-y-3 text-sm">
         <div>

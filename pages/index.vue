@@ -1,5 +1,5 @@
 <template>
-  <div class="py-10 px-8 mx-auto rounded mt-16 border-8 ring-8 ring-neutral-50 border-neutral-100 max-w-4xl">
+  <div class="py-10 px-8 text-neutral-400 mx-auto rounded mt-16 border-8 ring-8 ring-neutral-50 border-neutral-100 max-w-4xl">
     <div class="flex justify-between items-end">
       <h1 class="text-3xl font-bold text-neutral-400">Guitar Tuner</h1>
       <div class="flex space-x-5">
@@ -25,22 +25,22 @@
         />
         <div
           v-if="isLoading"
-          class="flex flex-col items-center fill-neutral-500 text-neutral-500"
+          class="flex flex-col items-center fill-neutral-500 text-neutral-500 mt-8"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-40 h-40 animate-pulse">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z" />
           </svg>
           <div class="text-xl">Trying to connect the tuner...</div>
         </div>
-        <div class="border-4 rounded border-neutral-500 pt-6 px-4 w-full">
-          <div class="text-xl uppercase font-bold text-neutral-700">tunings</div>
+        <div class="rounded bg-neutral-50 shadow-lg pt-6 px-4 mt-8">
+          <div class="text-xl uppercase text-neutral-500 tracking-widest font-bold">tunings</div>
           <div class="flex flex-col items-start mt-4 pb-2 max-h-40 overflow-auto">
             <button
               v-for="[name, tuning] in Object.entries(tunings)"
               :key="name"
-              class="hover:text-neutral-700 hover:text-xl"
+              class="hover:text-neutral-600 hover:text-xl"
               @click="activeTuning = tuning"
-              :class="activeTuning === tuning ? 'text-neutral-700 text-xl' : 'text-neutral-500 text-lg '"
+              :class="activeTuning === tuning ? 'text-neutral-600 text-xl' : 'text-lg '"
             >
               {{ name }} : {{ tuning }}
             </button>

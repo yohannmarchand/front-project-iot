@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="relative text-neutral-600">
     <div
       class="cursor-pointer"
       @click="openSetting = !openSetting"

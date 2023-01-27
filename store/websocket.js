@@ -4,13 +4,8 @@ export const state = () => ({
   isLoading: false,
   socket: null,
   input: 0,
+  note: 'A2',
 })
-
-export const getters = {
-  getIsConnected(state) {
-    return state.isConnected
-  },
-}
 
 export const mutations = {
   SET_IP(state, ip) {
@@ -36,6 +31,10 @@ export const mutations = {
     state.websocket?.close()
     state.websocket = null
   },
+
+  SET_NOTE(state, note) {
+    state.note = note
+  }
 }
 
 export const actions = {
@@ -72,7 +71,11 @@ export const actions = {
   onMessage({ state, commit }) {
     state.socket.addEventListener('message', (event) => {
       console.log('Message from server ', event.data);
-      commit('SET_INPUT', event.data)
+      // commit('SET_INPUT', event.data.frequency)
+      //
+      // if (this.$store.state.userPreference.isDetectingNote) {
+      //   commit('SET_NOTE', event.data.note)
+      // }
     });
   }
 }

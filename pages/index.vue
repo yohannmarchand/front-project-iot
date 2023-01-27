@@ -14,14 +14,14 @@
 
       <div
         class="flex flex-col space-y-10 w-full mt-10"
-        :class="activeFrequency && !isLoading ? 'justify-between' : 'justify-end'"
+        :class="activeNote && !isLoading ? 'justify-between' : 'justify-end'"
       >
-        <SelectingNote :note="frequencies.find(({ frequency }) => frequency == activeFrequency)"/>
+        <SelectingNote :note="frequencies.find(({ frequency }) => frequency == activeNote)"/>
 
         <Accordeur
-          v-if="activeFrequency && !isLoading && !isListenMode"
+          v-if="activeNote && !isLoading && !isListenMode"
           class="mt-16"
-          :rightValue="activeFrequency"
+          :rightValue="activeNote"
         />
         <div
           v-if="isLoading"
@@ -78,8 +78,8 @@ export default {
   },
 
   computed: {
-    ...mapState('websocket', ['isConnected', 'isLoading']),
-    ...mapState('userPreference', ['isListenMode']),
+    ...mapState('websocket', ['isConnected', 'isLoading', "note"]),
+    ...mapState('userPreference', ['isListenMode', 'isDetectingNote']),
 
     activeTuning: {
       get: function () {
@@ -88,6 +88,10 @@ export default {
       set: function (tuning) {
         this.$store.commit('userPreference/SET_TUNING', tuning)
       },
+    },
+
+    activeNote() {
+      return this.isDetectingNote ? frequencies.find(({ name }) => name == this.note).frequency : this.activeFrequency
     }
   },
 

@@ -20,7 +20,7 @@
           :class="{ 'border-neutral-500': meter === component}"
           @click="$store.commit('userPreference/SET_METER', component)"
         >
-          <div class="text-center w-full">{{ name }}</div>
+          <div class="text-center w-full text-neutral-600">{{ name }}</div>
         </div>
       </div>
 

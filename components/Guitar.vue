@@ -282,7 +282,7 @@
       onClick(key) {
         if (this.isListenMode) {
           const note = this.tuning[key].toLowerCase()
-          const audio = new Audio(`/_nuxt/assets/sounds/${note}.mp3`);
+          const audio = new Audio(require(`@/assets/sounds/${note}.mp3`).default);
           audio.play()
         }
 

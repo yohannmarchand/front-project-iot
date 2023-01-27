@@ -19,7 +19,7 @@
         <SelectingNote :note="frequencies.find(({ frequency }) => frequency == activeFrequency)"/>
 
         <Accordeur
-          v-if="activeFrequency && !isLoading"
+          v-if="activeFrequency && !isLoading && !isListenMode"
           class="mt-16"
           :rightValue="activeFrequency"
         />
@@ -42,7 +42,7 @@
               @click="activeTuning = tuning"
               :class="activeTuning === tuning ? 'text-neutral-700 text-xl' : 'text-neutral-500 text-lg '"
             >
-              {{ name }} : {{ tuning }}
+              {{ name }}
             </button>
           </div>
         </div>
@@ -53,7 +53,6 @@
 
 <script>
 import Accordeur from "../components/Accordeur";
-import GuitarView from "../components/GuitarView"
 import UserSetting from "../components/UserSetting"
 import MeterSelector from "../components/MeterSelector"
 
@@ -65,7 +64,6 @@ import { mapState } from 'vuex'
 export default {
   components: {
     Accordeur,
-    GuitarView,
     MeterSelector,
     UserSetting,
   },
@@ -81,6 +79,7 @@ export default {
 
   computed: {
     ...mapState('websocket', ['isConnected', 'isLoading']),
+    ...mapState('userPreference', ['isListenMode']),
 
     activeTuning: {
       get: function () {

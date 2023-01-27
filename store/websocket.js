@@ -50,10 +50,6 @@ export const actions = {
       dispatch('onOpen')
       dispatch('onError')
       dispatch('onMessage')
-
-      window.setInterval(() => {
-        commit('SET_INPUT', Math.floor(Math.random() * (500 - 200 + 1) + 200))
-      }, 500)
     }
   },
 

@@ -1,10 +1,9 @@
 <template>
   <div class="flex flex-col grow justify-end">
     <div class="text-center text-3xl text-zinc-400 font-bold">{{ input }}</div>
-
     <component
       :is="meter"
-      :value="value"
+      :value="input"
       :rightValue="correctValue"
       :range="range"
     />
@@ -36,10 +35,6 @@ export default {
     ...mapState('websocket', ['input']),
     ...mapState('userPreference', ['meter']),
 
-    value() {
-      return this.input;
-    },
-
     correctValue() {
       return this.rightValue
     }
@@ -47,7 +42,7 @@ export default {
 
   watch: {
     correctValue() {
-      this.input = Math.ceil(this.correctValue) - (this.range / 2)
+      this.$store.commit('websocket/SET_INPUT', Math.ceil(this.correctValue) - (this.range / 2))
     }
   },
 }

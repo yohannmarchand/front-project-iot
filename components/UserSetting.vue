@@ -64,6 +64,7 @@
           </select>
         </div>
         <SwitchInput v-model="isDetectingNote" label="Tone auto detection" />
+        <SwitchInput v-model="isListenMode" label="Listening Mode" />
       </div>
     </div>
   </div>
@@ -99,6 +100,15 @@ export default {
       },
       set: function (isDetectingNote) {
         this.$store.commit('userPreference/SET_IS_DETECTING_NOTE', isDetectingNote)
+      },
+    },
+
+    isListenMode: {
+      get: function () {
+        return this.$store.state.userPreference.isListenMode
+      },
+      set: function (isListenMode) {
+        this.$store.commit('userPreference/SET_IS_LISTEN_MODE', isListenMode)
       },
     },
 

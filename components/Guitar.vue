@@ -251,14 +251,6 @@
         </clipPath>
       </defs>
       </svg>
-
-      <div v-if="isListenMode">
-          <audio
-            class="hidden"
-            ref="audioPlayer"
-
-          />
-      </div>
   </div>
 </template>
 
@@ -270,24 +262,35 @@
     data() {
       return {
         frequency,
-        activeKey: null,
+        notAutoActiveKey: null,
       }
     },
 
     computed: {
-      ...mapState('userPreference', ['isListenMode', 'tuning']),
+      ...mapState('websocket', ['note']),
+      ...mapState('userPreference', ['isListenMode', 'tuning', 'isDetectingNote']),
+
+      autoActiveKey() {
+        return this.tuning.findIndex(note => this.note == note)
+      },
+
+      activeKey() {
+        return this.isDetectingNote ? this.autoActiveKey : this.notAutoActiveKey
+      }
     },
 
     methods: {
       onClick(key) {
-        if (this.isListenMode) {
-          const note = this.tuning[key].toLowerCase()
-          const audio = new Audio(require(`@/assets/sounds/${note}.mp3`).default);
-          audio.play()
-        }
+        if (!this.isDetectingNote) {
+          if (this.isListenMode) {
+            const note = this.tuning[key].toLowerCase()
+            const audio = new Audio(require(`@/assets/sounds/${note}.mp3`).default);
+            audio.play()
+          }
 
-        this.activeKey = key
-        this.$emit('click', key)
+          this.notAutoActiveKey = key
+          this.$emit('click', key)
+        }
       }
     },
   }

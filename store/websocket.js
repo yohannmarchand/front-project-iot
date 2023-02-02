@@ -71,11 +71,10 @@ export const actions = {
 
   onMessage({ state, commit }) {
     state.socket.addEventListener('message', (event) => {
-      const data = event.data.split(' ')
+      const data = JSON.parse(event.data)
 
-      console.log(data)
-      commit('SET_INPUT', data[0])
-      commit('SET_NOTE', data[1])
+      commit('SET_INPUT', data.frequency)
+      commit('SET_NOTE', data.closestNote)
     });
   }
 }

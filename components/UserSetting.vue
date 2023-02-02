@@ -55,8 +55,8 @@
           <label class="mb-2">Select your tuning</label>
           <select v-model="tuning" class="border rounded px-2 py-1">
             <option
-              v-for="[name, tuning] in Object.entries(tunings)"
-              :key="tuning"
+              v-for="([name, tuning], i) in Object.entries(tunings)"
+              :key="i"
               :value="tuning"
             >
               {{ name }}

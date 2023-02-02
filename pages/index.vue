@@ -14,17 +14,17 @@
 
       <div
         class="flex flex-col space-y-10 w-full mt-10"
-        :class="activeNote && !isLoading ? 'justify-between' : 'justify-end'"
+        :class="activeNote && !IS_LOADING ? 'justify-between' : 'justify-end'"
       >
         <SelectingNote :note="frequencies.find(({ frequency }) => frequency == activeNote)"/>
 
         <Accordeur
-          v-if="activeNote && !isLoading && !isListenMode"
+          v-if="activeNote && !IS_LOADING && !isListenMode"
           class="mt-16"
           :rightValue="activeNote"
         />
         <div
-          v-if="isLoading"
+          v-if="IS_LOADING"
           class="flex flex-col items-center fill-neutral-500 text-neutral-500 mt-8"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-40 h-40 animate-pulse">
@@ -78,7 +78,7 @@ export default {
   },
 
   computed: {
-    ...mapState('websocket', ['isConnected', 'isLoading', "note"]),
+    ...mapState('websocket', ['IS_CONNECTED', 'IS_LOADING', "note"]),
     ...mapState('userPreference', ['isListenMode', 'isDetectingNote']),
 
     activeTuning: {
@@ -91,13 +91,13 @@ export default {
     },
 
     activeNote() {
-      return this.isDetectingNote ? frequencies.find(({ name }) => name == this.note).frequency : this.activeFrequency
+      return this.isDetectingNote ? frequencies.find(({ name }) => name == this.note)?.frequency : this.activeFrequency
     }
   },
 
   methods: {
     onClick(value) {
-      this.activeFrequency = this.frequencies.find(({ name }) => name === this.activeTuning[value]).frequency
+      this.activeFrequency = this.frequencies.find(({ name }) => name === this.activeTuning[value])?.frequency
     },
   }
 }

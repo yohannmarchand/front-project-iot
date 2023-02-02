@@ -1,10 +1,10 @@
 export const state = () => ({
   ip: null,
-  isConnected: false,
-  isLoading: false,
+  IS_CONNECTED: false,
+  IS_LOADING: false,
   socket: null,
   input: 0,
-  note: 'A2',
+  note: null,
 })
 
 export const mutations = {
@@ -12,12 +12,12 @@ export const mutations = {
     state.ip = ip
   },
 
-  SET_ISLOADING(state, isLoading) {
-    state.isLoading = isLoading
+  SET_IS_LOADING(state, IS_LOADING) {
+    state.IS_LOADING = IS_LOADING
   },
 
-  SET_ISCONNECTED(state, isConnected) {
-    state.isConnected = isConnected
+  SET_IS_CONNECTED(state, IS_CONNECTED) {
+    state.IS_CONNECTED = IS_CONNECTED
   },
   SET_SOCKECT(state, socket) {
     state.socket = socket
@@ -44,7 +44,7 @@ export const actions = {
 
       commit('CLOSE_WEBSOCKET')
       commit('SET_SOCKECT', new WebSocket(`ws://${ip}/ws`))
-      commit('SET_ISLOADING', true)
+      commit('SET_IS_LOADING', true)
 
       dispatch('onOpen')
       dispatch('onError')
@@ -55,27 +55,26 @@ export const actions = {
   onOpen({ state, commit }) {
     state.socket.addEventListener('open', (event) => {
       console.log('Hello Server!');
-      commit('SET_ISLOADING', false)
-      commit('SET_ISCONNECTED', true)
+      commit('SET_IS_LOADING', false)
+      commit('SET_IS_CONNECTED', true)
     });
   },
 
   onError({ state, commit }) {
     state.socket.addEventListener('error', (event) => {
       console.log('Error Server!');
-      commit('SET_ISCONNECTED', false)
-      commit('SET_ISLOADING', false)
+      commit('SET_IS_CONNECTED', false)
+      commit('SET_IS_LOADING', false)
     });
   },
 
   onMessage({ state, commit }) {
     state.socket.addEventListener('message', (event) => {
-      console.log('Message from server ', event.data);
-      // commit('SET_INPUT', event.data.frequency)
-      //
-      // if (this.$store.state.userPreference.isDetectingNote) {
-      //   commit('SET_NOTE', event.data.note)
-      // }
+      const data = event.data.split(' ')
+
+      console.log(data)
+      commit('SET_INPUT', data[0])
+      commit('SET_NOTE', data[1])
     });
   }
 }

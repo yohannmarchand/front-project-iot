@@ -19,7 +19,8 @@ export const mutations = {
   SET_IS_CONNECTED(state, IS_CONNECTED) {
     state.IS_CONNECTED = IS_CONNECTED
   },
-  SET_SOCKECT(state, socket) {
+  
+  SET_SOCKET(state, socket) {
     state.socket = socket
   },
 
@@ -43,7 +44,7 @@ export const actions = {
       commit('SET_IP', ip)
 
       commit('CLOSE_WEBSOCKET')
-      commit('SET_SOCKECT', new WebSocket(`ws://${ip}/ws`))
+      commit('SET_SOCKET', new WebSocket(`ws://${ip}/ws`))
       commit('SET_IS_LOADING', true)
 
       dispatch('onOpen')

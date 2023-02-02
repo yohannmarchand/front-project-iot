@@ -63,7 +63,7 @@
             </option>
           </select>
         </div>
-        <SwitchInput v-model="isDetectingNote" label="Tone auto detection" />
+        <SwitchInput v-model="isDetectingNote" label="Note detection" />
         <SwitchInput v-model="isListenMode" label="Listening Mode" />
       </div>
     </div>

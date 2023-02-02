@@ -19,7 +19,7 @@ export const mutations = {
   SET_IS_CONNECTED(state, IS_CONNECTED) {
     state.IS_CONNECTED = IS_CONNECTED
   },
-  
+
   SET_SOCKET(state, socket) {
     state.socket = socket
   },
